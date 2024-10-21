@@ -6,11 +6,11 @@ This project is an Android app for managing notes. The app allows users to add, 
 
 The following **required** functionality is completed:
 * [x] User sees a list of notes displayed in a RecyclerView.
-* [x] User can add a new note using a form.
+* [x] User can add a new note.
 * [x] User can edit existing notes.
 * [x] User can delete notes.
 * [x] Each note consists of a title and a description.
-* [x] The app saves notes to a local database using Room.
+* [x] The app saves notes to a local database.
 
 ## Video Walkthrough
 
