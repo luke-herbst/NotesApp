@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Project7</string>
+    <string name="delete_ticket">Delete Ticket</string>
+    <string name="new_ticket">New Ticket</string>
+</resources>
