@@ -1,11 +1,10 @@
 package iu.c323.fall2024.project7
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import iu.c323.fall2024.project7.databinding.ListItemNoteBinding
+import iu.c323.fall2024.project7.model.Note
 import java.util.UUID
 
 class NoteListAdapter(
@@ -34,13 +33,12 @@ class NoteHolder(
     fun bind(note: Note, onNoteClicked: (noteId: UUID) -> Unit, onDeleteClick: (noteId: UUID) -> Unit) {
         binding.noteTitle.text = note.title
 
+        binding.noteDescription.text = note.description
+
         binding.root.setOnClickListener {
             onNoteClicked(note.id)
         }
 
-        binding.deleteButton.setOnClickListener {
-            onDeleteClick(note.id)
-        }
     }
 }
 

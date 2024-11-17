@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/noteListFragment">
+    app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/noteListFragment"
         android:name="iu.c323.fall2024.project7.NoteListFragment"
@@ -22,6 +22,15 @@
             android:name="noteId"
             app:argType="java.util.UUID"
             app:nullable="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="iu.c323.fall2024.project7.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_noteListFragment"
+            app:destination="@id/noteListFragment" />
     </fragment>
 
 </navigation>

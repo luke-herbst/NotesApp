@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import iu.c323.fall2024.project7.databinding.FragmentNoteListBinding
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -38,7 +39,8 @@ class NoteListFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding  = FragmentNoteListBinding.inflate(inflater,container,false)
-        binding.noteRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.noteRecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
         return binding.root
     }
 

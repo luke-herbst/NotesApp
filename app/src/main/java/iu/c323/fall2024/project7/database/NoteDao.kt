@@ -5,7 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import iu.c323.fall2024.project7.Note
+import iu.c323.fall2024.project7.model.Note
 import kotlinx.coroutines.flow.Flow
 import java.util.UUID
 

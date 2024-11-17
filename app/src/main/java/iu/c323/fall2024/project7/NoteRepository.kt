@@ -3,6 +3,7 @@ package iu.c323.fall2024.project7
 import android.content.Context
 import androidx.room.Room
 import iu.c323.fall2024.project7.database.NoteDatabase
+import iu.c323.fall2024.project7.model.Note
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
