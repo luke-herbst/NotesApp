@@ -12,6 +12,9 @@
         <action
             android:id="@+id/show_note_detail"
             app:destination="@id/noteDetailFragment" />
+        <action
+            android:id="@+id/action_noteListFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteDetailFragment"

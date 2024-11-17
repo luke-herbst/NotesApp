@@ -2,6 +2,7 @@ package iu.c323.fall2024.project7
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import iu.c323.fall2024.project7.databinding.FragmentNoteListBinding
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -40,6 +42,14 @@ class NoteListFragment: Fragment() {
     ): View? {
         _binding  = FragmentNoteListBinding.inflate(inflater,container,false)
         binding.noteRecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        val auth = FirebaseAuth.getInstance()
+        if(auth.currentUser == null){
+            findNavController().navigate(R.id.loginFragment)
+        }
+        binding.navigateToLoginButton.setOnClickListener{
+            Log.d("NoteListFragment", "Navigating to LoginFragment")
+            findNavController().navigate(R.id.action_noteListFragment_to_loginFragment)
+        }
 
         return binding.root
     }
@@ -52,11 +62,8 @@ class NoteListFragment: Fragment() {
                     binding.noteRecyclerView.adapter = NoteListAdapter(notes,
                         onNoteClicked = { noteId ->
                             findNavController().navigate(NoteListFragmentDirections.showNoteDetail(noteId))
-//                            findNavController().navigate(R.id.show_note_detail)
-
-//                            findNavController().navigate(NoteListFragmentDirections.showNoteDetail())
-
-                        },
+                        }
+                        ,
                         onDeleteClick = { noteId ->
                             noteListViewModel.deleteNote(noteId)
                         }

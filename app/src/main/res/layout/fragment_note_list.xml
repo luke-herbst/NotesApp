@@ -9,29 +9,59 @@
     android:orientation="vertical"
     android:layout_margin="10dp">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <ImageButton
+            android:id="@+id/navigateToLoginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_login"
+            android:layout_gravity="end|center_vertical"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="10dp"/>
+
+        <!-- Add Note Button (ImageButton) -->
+        <ImageButton
+            android:id="@+id/addNoteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_note"
+            android:layout_gravity="end|center_vertical"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="10dp"/>
+    </androidx.appcompat.widget.Toolbar>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/note_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/addNoteButton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
 
         />
-    <Button
-        android:id="@+id/addNoteButton"
-        android:layout_width="370dp"
-        android:layout_height="50dp"
-        android:padding="10dp"
-        android:text="ADD NOTE"
-        android:title="@string/new_ticket"
-        android:textSize="17sp"
-        app:layout_constraintTop_toBottomOf="@+id/note_recycler_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
+<!--    <Button-->
+<!--        android:id="@+id/addNoteButton"-->
+<!--        android:layout_width="370dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:padding="10dp"-->
+<!--        android:text="ADD NOTE"-->
+<!--        android:title="@string/new_ticket"-->
+<!--        android:textSize="17sp"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/note_recycler_view"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

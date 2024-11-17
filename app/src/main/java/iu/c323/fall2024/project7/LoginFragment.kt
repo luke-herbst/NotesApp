@@ -26,21 +26,17 @@ class LoginFragment: Fragment() {
     ): View? {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val auth = FirebaseAuth.getInstance()
-        if(auth.currentUser != null){
-            goToNotesScreen()
-        }
+
+        updateUi()
         binding.btnLogin.setOnClickListener {
-            binding.btnLogin.isEnabled = false
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
             if (email.isBlank() || password.isBlank()) {
                 Toast.makeText(this.context, "Email/password cannot be empty", Toast.LENGTH_SHORT)
                     .show()
-                binding.btnLogin.isEnabled = true
                 return@setOnClickListener
             }
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener{task->
-                binding.btnLogin.isEnabled = true
                 if(task.isSuccessful){
                     Toast.makeText(this.context, "Success!", Toast.LENGTH_SHORT).show()
                     goToNotesScreen()
@@ -50,12 +46,66 @@ class LoginFragment: Fragment() {
                 }
             }
         }
+        binding.btnSignUp.setOnClickListener{
+            val email = binding.etEmail.text.toString()
+            val password = binding.etPassword.text.toString()
+            if (email.isBlank() || password.isBlank()) {
+                Toast.makeText(this.context, "Email/password cannot be empty", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this.context, "Account created successfully!", Toast.LENGTH_SHORT).show()
+                    goToNotesScreen()
+                } else {
+                    Log.e(TAG, "createUserWithEmail failed", task.exception)
+                    Toast.makeText(this.context, "Sign-up failed", Toast.LENGTH_SHORT).show()
+                }
+            }
 
+        }
+        binding.btnLogout.setOnClickListener {
+            handleLogout()
+            updateUi()
+        }
+        binding.btnToNotes.setOnClickListener{
+            goToNotesScreen()
+        }
         return binding.root
     }
 
     private fun goToNotesScreen(){
         this.findNavController().navigate(R.id.noteListFragment)
+    }
+
+    private fun handleLogout() {
+        val auth = FirebaseAuth.getInstance()
+        auth.signOut()
+        Toast.makeText(requireContext(), "Signed out", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun updateUi(){
+        val auth = FirebaseAuth.getInstance()
+        if(auth.currentUser != null){
+            binding.btnLogin.visibility = View.GONE
+            binding.btnSignUp.visibility = View.GONE
+            binding.etEmail.visibility = View.GONE
+            binding.etPassword.visibility = View.GONE
+            binding.btnLogout.visibility = View.VISIBLE
+            binding.btnToNotes.visibility = View.VISIBLE
+        } else{
+            binding.btnLogin.visibility = View.VISIBLE
+            binding.btnSignUp.visibility = View.VISIBLE
+            binding.etEmail.visibility = View.VISIBLE
+            binding.etPassword.visibility = View.VISIBLE
+            binding.btnLogout.visibility = View.GONE
+            binding.btnToNotes.visibility = View.GONE
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
