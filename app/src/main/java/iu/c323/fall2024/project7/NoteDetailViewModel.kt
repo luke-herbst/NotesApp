@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.UUID
 
-class NoteDetailViewModel(noteId: UUID?): ViewModel() {
+class NoteDetailViewModel(noteId: String?): ViewModel() {
     private val noteId = noteId
     private val noteRepository = NoteRepository.get()
     private val _note: MutableStateFlow<Note?> = MutableStateFlow(null)
@@ -20,11 +20,11 @@ class NoteDetailViewModel(noteId: UUID?): ViewModel() {
         viewModelScope.launch {
             try {
                 if (noteId != null){
-                    noteRepository.getNote(noteId).collect{
+                    noteRepository.getNote(UUID.fromString(noteId)).collect{
                         _note.value = it
                     }
                 } else {
-                    _note.value = Note(UUID.randomUUID(), "", "")
+                    _note.value = Note(UUID.randomUUID().toString(), "", "")
                 }
 
             }
@@ -45,6 +45,11 @@ class NoteDetailViewModel(noteId: UUID?): ViewModel() {
             }
         }
     }
+    fun deleteNote(noteId: UUID) {
+        viewModelScope.launch {
+            noteRepository.deleteNote(noteId)
+        }
+    }
 
 
     override fun onCleared() {
@@ -59,7 +64,7 @@ class NoteDetailViewModel(noteId: UUID?): ViewModel() {
     }
 }
 class NoteDetailViewModelFactory(
-    private val noteId: UUID?
+    private val noteId: String?
 ): ViewModelProvider.Factory{
     override fun <N : ViewModel> create(modelClass: Class<N>): N {
         return NoteDetailViewModel(noteId) as N

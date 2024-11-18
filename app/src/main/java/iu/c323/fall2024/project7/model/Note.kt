@@ -6,7 +6,7 @@ import java.util.UUID
 
 @Entity
 data class Note(
-    @PrimaryKey val id: UUID,
-    val title: String,
-    val description: String
+    @PrimaryKey var id: String = UUID.randomUUID().toString(),
+    var title: String = "",
+    var description: String= ""
 )

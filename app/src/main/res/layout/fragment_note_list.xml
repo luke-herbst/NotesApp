@@ -28,7 +28,6 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="10dp"/>
 
-        <!-- Add Note Button (ImageButton) -->
         <ImageButton
             android:id="@+id/addNoteButton"
             android:layout_width="wrap_content"

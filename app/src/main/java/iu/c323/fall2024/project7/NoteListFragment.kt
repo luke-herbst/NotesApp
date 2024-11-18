@@ -65,7 +65,7 @@ class NoteListFragment: Fragment() {
                         }
                         ,
                         onDeleteClick = { noteId ->
-                            noteListViewModel.deleteNote(noteId)
+                            noteListViewModel.deleteNote(UUID.fromString(noteId))
                         }
                     )
                 }
